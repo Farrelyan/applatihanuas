@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="/docs/5.3/assets/js/color-modes.js"></script>
@@ -11,6 +10,10 @@
     <title>Starter Template · Bootstrap v5.3</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/starter-template/">
+
+    
+
+    
 
 <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -31,19 +34,26 @@
 
     <div class="row g-5">
       <div class="col-md-6">
-        <h2 class="text-body-emphasis">Form Input Artikel</h2>
-        <p>Masukan data yang akan di proses</p>
-        <form>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input class="form-control"/>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Artikel</label>
-                <textarea class="form-control" id="nama" name="artikel" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <h2 class="text-body-emphasis">Tampil Input Data</h2>
+        <table class="table table-bordered">
+          <tr>
+            <th>Username</th>
+            <th>Artikel</th>
+            <th>Created_at</th>
+            <th>Update_at</th>
+            <th>Aksi</th>
+          </tr>
+          @foreach($post_list as $post)
+          <tr>
+            <td>{{ $post->user->username }}</td>
+            <td>{{ $post->artikel }}</td>
+            <td>{{ $post->created_at }}</td>
+            <td>{{ $post->updated_at }}</td>
+            <td><a href="{{ site_url('Welcome/hapus/'.$post->id)}}">Hapus</a> | <a href="{{ site_url('Welcome/ubah/'.$post->id) }}">Ubah</a></td>
+          </tr>
+          @endforeach
+        </table>
+        <a href="{{ site_url('Welcome/index') }}" class="btn btn-success">Tambah</a>
       </div>
     </div>
   </main>
