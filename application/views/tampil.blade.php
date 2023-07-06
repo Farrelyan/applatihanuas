@@ -11,6 +11,10 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/starter-template/">
 
+    
+
+    
+
 <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Favicons -->
@@ -30,24 +34,30 @@
 
     <div class="row g-5">
       <div class="col-md-6">
-        <h2 class="text-body-emphasis">Form Input Artikel</h2>
-        <p>Masukan data yang akan di proses</p>
-        <form method="post" action="{{ site_url('Welcome/update/'. $post->id) }}">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <select class="form-control" name="username">
-                  @foreach($avail_user as $user)
-                  <option value="{{ $user->id }}" {{ $post->user_id == $user->id ? "selected" : "" }}>{{ $user->username }}</option>
-                  @endforeach
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Artikel</label>
-                <textarea class="form-control" id="nama" name="artikel" rows="3">{{ $post->artikel }}</textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a class="btn btn-secondary" href="{{site_url('Welcome/tampil')}}">Tampil</a>
-        </form>
+        <h2 class="text-body-emphasis">Tampil Input Data</h2>
+        <table class="table table-bordered">
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Artikel</th>
+            <th>Jenis</th>
+            <th>Created_at</th>
+            <th>Update_at</th>
+            <th>Aksi</th>
+          </tr>
+          @foreach($post_list as $post)
+          <tr>
+            <td>{{ $post->user->username }}</td>
+            <td>{{ $post->user->email }}</td>
+            <td>{{ $post->article }}</td>
+            <td>{{ $post->jenis}}</td>
+            <td>{{ $post->created_at }}</td>
+            <td>{{ $post->updated_at }}</td>
+            <td><a href="{{ site_url('Welcome/hapus/'.$post->id)}}">Hapus</a> | <a href="{{ site_url('Welcome/ubah/'.$post->id) }}">Ubah</a></td>
+          </tr>
+          @endforeach
+        </table>
+        <a href="{{ site_url('Welcome/index') }}" class="btn btn-success">Tambah</a>
       </div>
     </div>
   </main>

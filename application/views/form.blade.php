@@ -11,10 +11,6 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/starter-template/">
 
-    
-
-    
-
 <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Favicons -->
@@ -34,26 +30,34 @@
 
     <div class="row g-5">
       <div class="col-md-6">
-        <h2 class="text-body-emphasis">Tampil Input Data</h2>
-        <table class="table table-bordered">
-          <tr>
-            <th>Username</th>
-            <th>Artikel</th>
-            <th>Created_at</th>
-            <th>Update_at</th>
-            <th>Aksi</th>
-          </tr>
-          @foreach($post_list as $post)
-          <tr>
-            <td>{{ $post->user->username }}</td>
-            <td>{{ $post->artikel }}</td>
-            <td>{{ $post->created_at }}</td>
-            <td>{{ $post->updated_at }}</td>
-            <td><a href="{{ site_url('Welcome/hapus/'.$post->id)}}">Hapus</a> | <a href="{{ site_url('Welcome/ubah/'.$post->id) }}">Ubah</a></td>
-          </tr>
-          @endforeach
-        </table>
-        <a href="{{ site_url('Welcome/index') }}" class="btn btn-success">Tambah</a>
+        <h2 class="text-body-emphasis">Form Input Artikel</h2>
+        <p>Masukan data yang akan di proses</p>
+        <form method="post" action="{{ site_url('Welcome/simpan') }}">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <select class="form-control" name="username">
+                  @foreach($avail_user as $user)
+                  <option value="{{ $user->id }}">{{ $user->username }}</option>
+                  @endforeach
+                </select>
+            </div>
+            <label for="exampleInputEmail1" class="form-label">Jenis</label>
+            <div>
+            <input type="radio" id="berita" name="fav_language" value="Berita"> 
+            <label for="berita">Berita</label>
+             <input type="radio" id="tutorial" name="fav_language" value="Tutorial">
+             <label for="tutorial">Tutorial</label>
+              <input type="radio" id="blog" name="fav_language" value="Blog">
+            <label for="blog">Blog</label>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Artikel</label>
+                <textarea class="form-control" id="nama" name="artikel" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-secondary" href="{{site_url('Welcome/tampil')}}">Tampil</a>
+        </form>
       </div>
     </div>
   </main>
